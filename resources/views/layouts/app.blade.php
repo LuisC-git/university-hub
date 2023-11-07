@@ -18,8 +18,18 @@
             <a href="/" class="text-3xl font-black">universityHub</a>
 
             <nav class="flex gap-2 items-center">
-                <a class="font-bold uppercase text-gray-600" href="#">Login</a>
+                @auth
+                <a class="font-bold text-gray-600" href="{{ route('login') }}">
+                Hola: <span class="font-normal"> {{ auth()->user()->username}} </span>
+                </a>
+                <a class="font-bold uppercase text-gray-600" href="{{ route('login') }}">Cerrar sesión</a>
+                @endauth
+
+                @guest
+                <a class="font-bold uppercase text-gray-600" href="{{ route('login') }}">Login</a>
                 <a class="font-bold uppercase text-gray-600" href="{{ route('register') }}">Crear cuenta</a>
+                @endguest
+
             </nav>
 
         </div>
