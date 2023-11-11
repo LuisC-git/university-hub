@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
+    @stack('styles')
     {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     <title>universityHub | @yield('titulo')</title>
     @vite('resources/js/app.js')
@@ -30,7 +31,7 @@
                       Crear
                 </a>
 
-                <a class="font-bold text-gray-600" href="#">
+                <a class="font-bold text-gray-600" href="{{ route('post.index',auth()->user()->username) }}">
                 Hola: <span class="font-normal"> {{ auth()->user()->username}} </span>
                 </a>
                 <form  method="POST" action="{{ route('logout') }}">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImagenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
@@ -46,3 +47,6 @@ Route::get('/{user:username}',[PostController::class, 'index'])->name('post.inde
 
 #crear publicación
 Route::get('/post/create',[PostController::class,'create'])->name('post.create');
+
+#Imagen publicacion
+Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');

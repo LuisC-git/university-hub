@@ -20,7 +20,7 @@
                 @endif
 
                 <div class="mb-2">
-                    <label for="email" class="c">
+                    <label for="email" class="mb-2 block uppercase text-gray-500">
                         E-mail
                     </label>
                     <input type="email" name="email" id="email" placeholder="Correo"
