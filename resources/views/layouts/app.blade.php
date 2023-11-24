@@ -9,7 +9,6 @@
     @stack('styles')
     {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     <title>universityHub | @yield('titulo')</title>
-    @vite('resources/js/app.js')
 </head>
 
 <body class="bg-gray-100">
@@ -55,9 +54,12 @@
         <h2 class="font-black text-center text-3xl mb-5">@yield('titulo')</h2>
 
         @yield('contenido')
+
+        
     </main>
     <footer class="text-center p-5 text-gray-400  uppercase mt-5">
-            UniversityHub - todos los derechos reservados {{ now()->year }}
+        UniversityHub - todos los derechos reservados {{ now()->year }}
     </footer>
+    @stack('scripts')
 </body>
 </html>
