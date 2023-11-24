@@ -20,16 +20,25 @@ class PostController extends Controller
         // dd(auth()->user());
         // dd($user->username);
 
-        return view('dashboard',[
-             'user' => $user,
+        return view('dashboard', [
+            'user' => $user,
 
         ]);
     }
 
-    public function create(){
-    
-    return view('post.create');
-    
+    public function create()
+    {
+
+        return view('post.create');
     }
 
+    public function store(Request $request)
+    {
+
+        $this->validate($request, [
+            'titulo' => 'required|max:255',
+            'descripcion' => 'required',
+
+        ]);
+    }
 }
