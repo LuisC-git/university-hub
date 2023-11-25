@@ -21,8 +21,12 @@ class PostController extends Controller
         // dd(auth()->user());
         // dd($user->username);
 
+        $posts = Post::where('user_id', $user->id)->get();
+
+        dd($posts);
         return view('dashboard', [
             'user' => $user,
+            'posts' => $posts,
 
         ]);
     }
@@ -42,21 +46,33 @@ class PostController extends Controller
             'imagen' => 'required',
         ]);
 
-        Post::create([
+        // Post::create([
 
-            'titulo' => $request->titulo,
-            'descripcion' => $request->descripcion,
-            'imagen' => $request->imagen,
-            'user_id' => auth()->user()->id,
-        ]);
+        //     'titulo' => $request->titulo,
+        //     'descripcion' => $request->descripcion,
+        //     'imagen' => $request->imagen,
+        //     'user_id' => auth()->user()->id,
+        // ]);
 
-        //otra forma de crer registros
+        //? otra forma de crer registros
         // $post = new Post;
         // $post->titulo       = $request->titulo;
         // $post->descripcion  = $request->descripcion;
         // $post->imagen       = $request->imagen;
         // $post->user_id      = auth()->user()->id;
         // $post->save();
+
+
+        //? otra forma
+
+        $request->user()->posts()->create([
+            'titulo' => $request->titulo,
+            'descripcion' => $request->descripcion,
+            'imagen' => $request->imagen,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        
 
         return redirect()->route('post.index', auth()->user()->username);
     }
