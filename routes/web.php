@@ -44,10 +44,10 @@ Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 #principal
 Route::get('/{user:username}',[PostController::class, 'index'])->name('post.index');
 
-
 #crear publicación
 Route::get('/posts/create',[PostController::class,'create'])->name('post.create');
 Route::post('/posts',[PostController::class,'store'])->name('post.store');
+Route::get('/{user:username}/posts/{post}',[PostController::class,'show'])->name('post.show');
 
 #Imagen publicacion
 Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');
