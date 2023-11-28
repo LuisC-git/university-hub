@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ImagenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -51,3 +52,7 @@ Route::get('/{user:username}/posts/{post}',[PostController::class,'show'])->name
 
 #Imagen publicacion
 Route::post('/imagenes',[ImagenController::class,'store'])->name('imagenes.store');
+
+#comentarios
+Route::post('/{user:username}/posts/{post}',[ComentarioController::class,'store'])->name('comentario.store');
+

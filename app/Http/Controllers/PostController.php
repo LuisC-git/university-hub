@@ -11,7 +11,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('show','index');
+        $this->middleware('auth')->except('show', 'index');
     }
 
     public function index(User $user)
@@ -23,7 +23,7 @@ class PostController extends Controller
 
         $posts = Post::where('user_id', $user->id)->paginate(6);
 
-        
+
         return view('dashboard', [
             'user' => $user,
             'posts' => $posts,
@@ -72,14 +72,17 @@ class PostController extends Controller
             'user_id' => auth()->user()->id,
         ]);
 
-        
+
 
         return redirect()->route('post.index', auth()->user()->username);
     }
 
-    public function show(User $user,Post $post){
+    public function show(User $user, Post $post)
+    {
 
-        return view('post.show',['post' => $post]);
+        return view('post.show', [
+            'user' => $user,
+            'post' => $post
+        ]);
     }
-    
 }
