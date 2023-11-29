@@ -22,6 +22,17 @@
                     {{ $post->descripcion }}
                 </p>
             </div>
+
+            @auth
+                @if($post->user_id === auth()->user()->id)
+                <form action=" {{ route('post.destroy', $post ) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <input type="submit" value="Eliminar Publicacion" class="bg-red-500 hover:bg-red-600 p-2 rounded text-white font-bold mt-4 cursor-pointer">
+                </form>
+                @endif
+            @endauth
+
         </div>
         <div class="md:w-1/2 p-5">
 
@@ -52,6 +63,24 @@
                     </form>
                 @endauth
 
+                <div class="bg-white shadow mb-5 max-h-96 overflow-y-auto mt-10">
+                    @if ($post->comentarios->count())
+                        @foreach ($post->comentarios as $comentario )
+                        <div class="p-5 border-gray-300 border-b">
+                            <a href=" {{ route('post.index',$comentario->user )}}" class="font-bold">
+                                {{ $comentario->user->username }}
+
+                            </a>
+                            <p> {{$comentario->comentario}} </p>
+                            <p class="text-sm text-gray-500"> {{$comentario->created_at->diffForHumans()}} </p>
+                        </div>
+                            
+                        @endforeach
+
+                    @else
+                    <p class="p-10 text-center">No hay comentarios aún</p>
+                    @endif
+                </div>
             </div>
 
         </div>
