@@ -70,7 +70,7 @@ class PostController extends Controller
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
             'imagen' => $request->imagen,
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->user()->id,  //no deberia ser requerido ya que el $request ya lleva el dato de usuario por http
         ]);
 
 
