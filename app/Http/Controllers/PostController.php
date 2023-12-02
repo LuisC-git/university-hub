@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentario;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,6 +35,11 @@ class PostController extends Controller
 
     public function create()
     {
+
+        $user = auth()->user();
+
+        
+        $this->authorize('viewAny', Comentario::class);
 
         return view('post.create');
     }

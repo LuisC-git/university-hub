@@ -12,9 +12,14 @@ class PostPolicy
     /**
      * Determine whether the user can delete the model.
      */
+    public function viewAny(User $user): bool
+    {
+        return false;
+    }
     public function delete(User $user, Post $post): bool
     {
         
         return $user->id === $post->user_id;
     }
+
 }
