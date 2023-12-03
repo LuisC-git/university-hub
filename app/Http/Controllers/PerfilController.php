@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comentario;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Policies\PerfilPolicy;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -31,6 +32,14 @@ class PerfilController extends Controller
     public function store(Request $request, User $user)
     {
 
-        // return redirect()->
+        $request->request->add([
+            'username' =>  Str::slug($request->username)
+        ]);
+        
+        $this->validate($request,[
+            'username' => ['required', 'unique:users,username,'.auth()->user()->id, 'min:3', 'max:20', 'not_in:twitter,editar-perfil' ],
+
+        ]);
+        
     }
 }
