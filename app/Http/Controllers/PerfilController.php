@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comentario;
 use App\Models\Post;
 use App\Models\User;
-use App\Policies\PerfilPolicy;
+use App\Models\Comentario;
 use Illuminate\Http\Request;
+use App\Policies\PerfilPolicy;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class PerfilController extends Controller
 {
@@ -17,9 +18,14 @@ class PerfilController extends Controller
 
     public function index(User $user)
     {
-        $this->authorize('viewAny', Comentario::class);
-
+        try {
+        $this->authorize('viewAny', $user);
         return view('perfil.index');
+        
+    } catch (AuthorizationException $e) {
+        // La autorización falló, realiza la redirección aquí
+        return redirect()->route('perfil.index',auth()->user());
+    }
     }
 
     public function store(Request $request, User $user)

@@ -36,11 +36,6 @@ class PostController extends Controller
     public function create()
     {
 
-        $user = auth()->user();
-
-        
-        $this->authorize('viewAny', Comentario::class);
-
         return view('post.create');
     }
 

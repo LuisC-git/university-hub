@@ -14,7 +14,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        Comentario::class => PerfilPolicy::class,
     ];
 
     /**
@@ -22,6 +21,5 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Gate::define('view', 'App\Policies\PerfilPolicy@view');
     }
 }
