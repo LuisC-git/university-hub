@@ -8,6 +8,7 @@ use App\Models\Comentario;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Policies\PerfilPolicy;
+use Intervention\Image\Facades\Image;
 use Illuminate\Auth\Access\AuthorizationException;
 
 class PerfilController extends Controller
@@ -38,8 +39,29 @@ class PerfilController extends Controller
         
         $this->validate($request,[
             'username' => ['required', 'unique:users,username,'.auth()->user()->id, 'min:3', 'max:20', 'not_in:twitter,editar-perfil' ],
-
         ]);
+
+        if($request->imagen){
+            $imagen = $request->file('imagen');
+
+            $nombreImagen = Str::uuid() .  "." . $imagen->extension();
+
+            $imagenServidor =  Image::make($imagen);
+            $imagenServidor->fit(500,500);
+
+            $imagenPath = public_path('perfiles') . '/' . $nombreImagen;
+            $imagenServidor->save($imagenPath);
+        }
+        
+        $usuario = User::find(auth()->user()->id);
+
+        $usuario->username = $request->username;
+        $usuario->imagen  = $nombreImagen ?? $usuario->imagen ?? null;
+        $usuario->save();
+        
+        #redireccion
+        return redirect()->route('post.index',$usuario->username);
+
         
     }
 }
