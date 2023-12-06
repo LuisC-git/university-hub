@@ -9,7 +9,7 @@
     <div class="flex justify-center">
         <div class="w-full md:w-8/12 lg:w-6/12 flex flex-col items-center md:flex-row">
             <div class="w-8/12 log:w-6/12 px-5 ">
-                <img src="{{ $user->imagen ? asset('perfiles'. '/' . $user->imagen) : asset('img/usuario.svg') }}" alt="Imagen De Perfil">
+                <img src="{{ asset('img/usuario.svg') }}" alt="Imagen De Perfil">
             </div>
             <div class="md:w-8/12 log:w-6/12 px-5 flex flex-col justify-center items-center py-10 md:items-start">
 
@@ -40,11 +40,27 @@
                     </span>
                 </p>
                 <p class="text-gray-800 text-sm mb-3 font-bold">
-                    {{ $user->posts->count() }}
+                    0
                     <span class="font-normal">
                         Post
                     </span>
                 </p>
+
+                @auth
+                @if ($user->id !== auth()->user()->id)
+                <form action="{{ route('user.follow', $user) }}" method="POST">
+                    @csrf
+                    <input  type="submit" class="bg-blue-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
+                        value="Seguir">
+                </form>
+
+                <form action="{{ route('user.unfollow', $user) }}" method="POST">
+                    @csrf
+                    <input  type="submit" class="bg-red-600 text-white uppercase rounded-lg px-3 py-1 text-xs font-bold cursor-pointer"
+                        value="Dejar de Seguir">
+                </form>       
+                @endif
+            @endauth
             </div>
         </div>
     </div>
