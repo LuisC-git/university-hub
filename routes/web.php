@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\ComentarioController;
-use App\Http\Controllers\ImagenController;
-use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ComentarioController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +46,6 @@ Route::post('/login',[LoginController::class,'store'])->name('login');
 #logout
 Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
-#principal
-Route::get('/{user:username}',[PostController::class, 'index'])->name('post.index');
-
 #crear publicación
 Route::get('/posts/create',[PostController::class,'create'])->name('post.create');
 Route::post('/posts',[PostController::class,'store'])->name('post.store');
@@ -62,3 +62,15 @@ Route::post('/{user:username}/posts/{post}',[ComentarioController::class,'store'
 Route::post('/post/{post}/likes',[LikeController::class,'store'])->name('post.like.store');
 Route::delete('/post/{post}/likes',[LikeController::class,'destroy'])->name('post.like.destroy');
 
+
+#perfil
+Route::get('/{user:username}/editar-perfil',[PerfilController::class,'index'])->name('perfil.index');
+Route::post('/{user:username}/editar-perfil',[PerfilController::class,'store'])->name('perfil.store');
+
+
+#principal
+Route::get('/{user:username}',[PostController::class, 'index'])->name('post.index');
+
+#seguidores
+Route::post('/{user:username}/follow',[FollowerController::class,'store'])->name('user.follow');
+Route::delete('/{user:username}/unfollow',[FollowerController::class,'destroy'])->name('user.unfollow');

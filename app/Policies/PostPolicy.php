@@ -17,4 +17,5 @@ class PostPolicy
         
         return $user->id === $post->user_id;
     }
+
 }
