@@ -28,9 +28,9 @@
                     @endauth
                 </div>
                 <p class="text-gray-800 text-sm mb-3 font-bold ">
-                    {{ $user->followers()->count() }}
+                    {{ $user->follower()->count() }}
                     <span class="font-normal">
-                        @choice('seguidor|seguidores', $user->followers()->count())
+                        @choice('seguidor|seguidores', $user->follower()->count())
                     </span>
                 </p>
                 <p class="text-gray-800 text-sm mb-3 font-bold">
@@ -48,7 +48,7 @@
 
                 @auth
                     @if ($user->id !== auth()->user()->id)
-                        @if (!$user->sigiendo(auth()->user()))
+                        @if (!$user->siguiendo(auth()->user()))
                             <form action="{{ route('user.follow', $user) }}" method="POST">
                                 @csrf
                                 <input type="submit"

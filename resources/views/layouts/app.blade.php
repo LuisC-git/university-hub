@@ -15,7 +15,7 @@
     <header class="p-5 boder-b bg-white shadow">
 
         <div class="container mx-auto flex justify-between items-center">
-            <a href="/" class="text-3xl font-black">universityHub</a>
+            <a href="{{ route('home')}}" class="text-3xl font-black">universityHub</a>
 
             <nav class="flex gap-2 items-center">
                 @auth
