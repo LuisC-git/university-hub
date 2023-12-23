@@ -8,6 +8,7 @@
     @vite('resources/css/app.css')
     @stack('styles')
     {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
+    @livewireStyles
     <title>universityHub | @yield('titulo')</title>
 </head>
 
@@ -61,5 +62,6 @@
         UniversityHub - todos los derechos reservados {{ now()->year }}
     </footer>
     @stack('scripts')
+    @livewireScripts
 </body>
 </html>
