@@ -8,23 +8,23 @@ use Livewire\Component;
 class ComentList extends Component
 {
 
-    protected $listeners = ['commentAdded' => 'refreshComments'];
+    protected $listeners = ['render' => 'render'];
+    public $post;
 
 
 
     public function render()
     {
 
-        $comentarios = Comentario::all();
-
-        return view('livewire.coment-list', [ 'comnetarios' => $comentarios ]);
+        // $comentario = Comentario::all();
+        return view('livewire.coment-list');
     }
 
 
-    public function refreshComments()
-    {
-        // Actualizar la lista de comentarios después de agregar uno nuevo
-        $this->render();
-    }
+    // public function commentAdded()
+    // {
+    //     // Actualizar la lista de comentarios después de agregar uno nuevo
+    //     $this->render();
+    // }
 
 }

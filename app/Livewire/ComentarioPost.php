@@ -39,6 +39,9 @@ class ComentarioPost extends Component
 
         // Limpiar el campo después de agregar el comentario
         $this->comentario = '';
+
+        // Emitir un evento para notificar a otros componentes
+        $this->dispatch('render');
     }
 
 

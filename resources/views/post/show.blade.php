@@ -101,7 +101,7 @@
                 <livewire:comentarioPost :post="$post" />
             @endauth
 
-                <livewire:comentList />
+                <livewire:comentList :post="$post"  />
 
         </div>
 
