@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
@@ -34,6 +35,8 @@ Route::get('/', function () {
 // Route::get('/app', function () {
 //     return view('layouts.app');
 // });
+
+Route::get('/',HomeController::class)->name('home');
 
 #crear cuenta
 Route::get('/crear-cuenta',[RegisterController::class,'index'])->name('register');
