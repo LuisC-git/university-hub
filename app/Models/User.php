@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -42,4 +43,32 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function posts(){
+
+        return $this->hasMany(Post::class);
+    }
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
+    //almancenar los seguidores
+    public function follower(){
+        return $this->belongsToMany(User::class,'followers','user_id','follower_id');
+    }
+
+    //alamacenar personas seguidas
+    public function following(){
+        return $this->belongsToMany(User::class,'followers','follower_id','user_id');
+    }
+
+
+
+    //comprobar si un usuario ya sigue a otro
+    public function siguiendo(User $user){
+
+        return $this->follower->contains($user->id);
+    }
+
 }
